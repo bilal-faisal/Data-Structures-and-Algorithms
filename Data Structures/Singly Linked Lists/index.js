@@ -84,12 +84,114 @@ class SinglyLinkedList {
     return prevHead;
   }
 
+  get(i) {
+    if (i < 0 || i >= this.length) {
+      return null;
+    }
+
+    let counter = 0;
+    let currentNode = this.head;
+    while (counter < i) {
+      currentNode = currentNode.next;
+      counter++;
+    }
+
+    return currentNode;
+  }
+
+  set(i, value) {
+    let foundNode = this.get(i);
+
+    if (foundNode) {
+      foundNode.val = value;
+      return true;
+    }
+
+    return false;
+  }
+
+  insert(i, value) {
+    if (i < 0 || i > this.length) return false;
+
+    if (i === this.length) {
+      this.push(value);
+      return true;
+    }
+
+    if (i === 0) {
+      this.unshift(value);
+      return true;
+    }
+
+    let newNode = new Node(value);
+    let prevNode = this.get(i - 1);
+    let nextNode = prevNode.next;
+
+    prevNode.next = newNode;
+    newNode.next = nextNode;
+    this.length++;
+
+    return true;
+  }
+
+  remove(i) {
+    if (i < 0 || i >= this.length) return false;
+
+    if (i == this.length - 1) {
+      return this.pop();
+    }
+
+    if (i == 0) {
+      return this.shift();
+    }
+
+    let prevNode = this.get(i - 1);
+    let removedNode = prevNode.next;
+    let nextNode = removedNode.next;
+
+    prevNode.next = nextNode;
+    this.length--;
+
+    return true;
+  }
+
+  reverse() {
+    let currentNode = this.head;
+    this.head = this.tail;
+    this.tail = currentNode;
+
+    let prevNode = null;
+    let nextNode;
+
+    for (let i = 0; i < this.length; i++) { // while (currentNode)
+      nextNode = currentNode.next;
+      currentNode.next = prevNode;
+
+      prevNode = currentNode;
+      currentNode = nextNode;
+    }
+
+    return this;
+  }
+
   traverse() {
     let myhead = this.head;
     while (myhead) {
       console.log(myhead.val);
       myhead = myhead.next;
     }
+  }
+
+  print(){
+    let node = this.head;
+    let arr = [];
+
+    while(node){
+      arr.push(node.val)
+      node = node.next;
+    }
+
+    console.log(arr);
   }
 }
 
@@ -98,4 +200,6 @@ list.push("A");
 list.push("B");
 list.push("C");
 list.push("D");
-list.traverse();
+list.print()
+list.reverse();
+list.print()
