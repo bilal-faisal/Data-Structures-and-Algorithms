@@ -15,6 +15,7 @@ class SinglyLinkedList {
     this.length = 0;
   }
 
+  // adding new node at the end of the list
   push(val) {
     let newNode = new Node(val);
     if (this.length == 0) {
@@ -28,6 +29,7 @@ class SinglyLinkedList {
     return this;
   }
 
+  // removing node at end
   pop() {
     if (this.length == 0) {
       return undefined;
@@ -52,6 +54,7 @@ class SinglyLinkedList {
     return y;
   }
 
+  // Adding new node at start of the list 
   unshift(val) {
     let newNode = new Node(val);
 
@@ -67,6 +70,7 @@ class SinglyLinkedList {
     return this;
   }
 
+  // Removing first node 
   shift() {
     if (this.length == 0) {
       return undefined;
@@ -84,6 +88,7 @@ class SinglyLinkedList {
     return prevHead;
   }
 
+  // Getting the value of a node based on its position.
   get(i) {
     if (i < 0 || i >= this.length) {
       return null;
@@ -96,9 +101,10 @@ class SinglyLinkedList {
       counter++;
     }
 
-    return currentNode;
+    return currentNode.val;
   }
 
+  // Updating the value of a node based on its position. 
   set(i, value) {
     let foundNode = this.get(i);
 
@@ -110,6 +116,7 @@ class SinglyLinkedList {
     return false;
   }
 
+  // inserting new node at i'th position
   insert(i, value) {
     if (i < 0 || i > this.length) return false;
 
@@ -134,6 +141,7 @@ class SinglyLinkedList {
     return true;
   }
 
+  // removing i'th node 
   remove(i) {
     if (i < 0 || i >= this.length) return false;
 
@@ -155,6 +163,7 @@ class SinglyLinkedList {
     return true;
   }
 
+  // reversing our list in place
   reverse() {
     let currentNode = this.head;
     this.head = this.tail;
@@ -163,7 +172,8 @@ class SinglyLinkedList {
     let prevNode = null;
     let nextNode;
 
-    for (let i = 0; i < this.length; i++) { // while (currentNode)
+    for (let i = 0; i < this.length; i++) {
+      // OR while (currentNode)
       nextNode = currentNode.next;
       currentNode.next = prevNode;
 
@@ -174,32 +184,56 @@ class SinglyLinkedList {
     return this;
   }
 
-  traverse() {
+  // traversing out list
+  print() {
     let myhead = this.head;
+    let result = "";
     while (myhead) {
-      console.log(myhead.val);
+      result += `${myhead.val} `;
       myhead = myhead.next;
     }
+    console.log(result + "\n");
   }
 
-  print(){
+  // converting our list to array
+  // This is something we don't usually do 
+  convertToArr() {
     let node = this.head;
     let arr = [];
 
-    while(node){
-      arr.push(node.val)
+    while (node) {
+      arr.push(node.val);
       node = node.next;
     }
 
-    console.log(arr);
+    return arr;
   }
 }
 
+// make SinglyLinkedList object
 let list = new SinglyLinkedList();
+
+// pushing A B C D to our list
 list.push("A");
 list.push("B");
 list.push("C");
 list.push("D");
-list.print()
+
+// traversing the whole list
+list.print();
+
+// remove last node
+list.pop();
+list.print();
+
+// add new A+ node at start
+list.unshift("A+");
+list.print();
+
+// remove first node
+list.shift();
+list.print();
+
+// reversing the list
 list.reverse();
-list.print()
+list.print();
