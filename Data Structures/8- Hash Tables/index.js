@@ -81,7 +81,3 @@ hashMap.set("cyan", "#4")
 console.log(hashMap.keyMap)
 hashMap.keys();
 hashMap.values();
-// console.log(hashMap.get("pink"))
-// console.log(hashMap.get("hello"))
-// console.log(hashMap.get("orange"))
-// console.log(hashMap.get("cyan"))
